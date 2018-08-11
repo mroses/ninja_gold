@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel='stylesheet' href="{{ url_for('static', filename='css/style.css') }}'">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Ninja Gold</h1>
+    {% if session['gold'] %}
+        <div class='gold'>
+            Gold: {{ session['gold'] }}
+        </div>
+    {% endif %}
+    <form action='/process' method='POST'>
+        <h3>Farm</h3>
+        <input type='hidden' name='location' value='farm'>
+        <input type='submit' value='Find Gold!'>
+    </form>
+    <form action='/process' method='POST'>
+        <h3>Cave</h3>
+        <input type='hidden' name='location' value='cave'>
+        <input type='submit' value='Find Gold!'>
+    </form>
+    <form action='/process' method='POST'>
+        <h3>House</h3>
+        <input type='hidden' name='location' value='house'>
+        <input type='submit' value='Find Gold!'>
+    </form>
+    <form action='/process' method='POST'>
+        <h3>Casino</h3>
+        <input type='hidden' name='location' value='casino'>
+        <input type='submit' value='Find Gold!'>
+    </form>
+    <div class='activities'>
+        <h3>Activities:</h3>
+        {% for activity in session['activities'] %}
+            <p class='{{ activity['class'] }}'>{{ activity['content'] }}</p>
+        {% endfor %}
+    </div>
+    <button><a href='/reset'>Reset</a></button>
+</body>
+</html>
